@@ -1,0 +1,4 @@
+bridge_id,license_id,result_id,relative_weight
+B1,L1,R1,3
+B2,L1,R2,2
+B3,L2,R1,1

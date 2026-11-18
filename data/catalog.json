@@ -1,0 +1,604 @@
+{
+  "title": "科研成果许可与转化收入仓",
+  "synthetic": true,
+  "tables": [
+    {
+      "name": "results",
+      "description": "成果而非证书。",
+      "columns": [
+        {
+          "name": "result_id",
+          "type": "string",
+          "description": "成果",
+          "nullable": true
+        },
+        {
+          "name": "family_id",
+          "type": "string",
+          "description": "权利族",
+          "nullable": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "合成名",
+          "nullable": true
+        }
+      ],
+      "key": [
+        "result_id"
+      ],
+      "references": [],
+      "path": "data/results.csv",
+      "row_count": 2,
+      "sha256": "8ec3f78d3857852f2c6e5d342acc882a9b40f4f8456f86e5cec8bd82fc8f70c3"
+    },
+    {
+      "name": "certificates",
+      "description": "同族证书续展不新生成果。",
+      "columns": [
+        {
+          "name": "certificate_id",
+          "type": "string",
+          "description": "证书",
+          "nullable": true
+        },
+        {
+          "name": "result_id",
+          "type": "string",
+          "description": "成果",
+          "nullable": true
+        },
+        {
+          "name": "start",
+          "type": "date",
+          "description": "起",
+          "nullable": true
+        },
+        {
+          "name": "end",
+          "type": "date",
+          "description": "止",
+          "nullable": true
+        },
+        {
+          "name": "region",
+          "type": "string",
+          "description": "地域",
+          "nullable": true
+        },
+        {
+          "name": "field",
+          "type": "string",
+          "description": "用途",
+          "nullable": true
+        }
+      ],
+      "key": [
+        "certificate_id"
+      ],
+      "references": [
+        {
+          "column": "result_id",
+          "target_table": "results",
+          "target_column": "result_id"
+        }
+      ],
+      "path": "data/certificates.csv",
+      "row_count": 3,
+      "sha256": "cd3db9c9484f8ea48b96e391e5d8b2c7a8a200722d3980c7d172a015036a0519"
+    },
+    {
+      "name": "ownership",
+      "description": "权利份额有效范围。",
+      "columns": [
+        {
+          "name": "ownership_id",
+          "type": "string",
+          "description": "行",
+          "nullable": true
+        },
+        {
+          "name": "result_id",
+          "type": "string",
+          "description": "成果",
+          "nullable": true
+        },
+        {
+          "name": "owner",
+          "type": "string",
+          "description": "所有者",
+          "nullable": true
+        },
+        {
+          "name": "share",
+          "type": "number",
+          "description": "份额",
+          "nullable": true
+        },
+        {
+          "name": "start",
+          "type": "date",
+          "description": "起",
+          "nullable": true
+        },
+        {
+          "name": "end",
+          "type": "date",
+          "description": "止",
+          "nullable": true
+        }
+      ],
+      "key": [
+        "ownership_id"
+      ],
+      "references": [
+        {
+          "column": "result_id",
+          "target_table": "results",
+          "target_column": "result_id"
+        }
+      ],
+      "path": "data/ownership.csv",
+      "row_count": 4,
+      "sha256": "f82d2656d340696c2090a8edad93b64c1adbb5e3f501d55de02fceee55368bad"
+    },
+    {
+      "name": "licenses",
+      "description": "明确范围及提成条款。",
+      "columns": [
+        {
+          "name": "license_id",
+          "type": "string",
+          "description": "合同",
+          "nullable": true
+        },
+        {
+          "name": "licensee",
+          "type": "string",
+          "description": "被许可方",
+          "nullable": true
+        },
+        {
+          "name": "region",
+          "type": "string",
+          "description": "地域",
+          "nullable": true
+        },
+        {
+          "name": "field",
+          "type": "string",
+          "description": "用途",
+          "nullable": true
+        },
+        {
+          "name": "exclusive",
+          "type": "boolean",
+          "description": "独占",
+          "nullable": true
+        },
+        {
+          "name": "start",
+          "type": "date",
+          "description": "起",
+          "nullable": true
+        },
+        {
+          "name": "end",
+          "type": "date",
+          "description": "止",
+          "nullable": true
+        },
+        {
+          "name": "signed_amount",
+          "type": "number",
+          "description": "签约展示额",
+          "nullable": true
+        },
+        {
+          "name": "minimum",
+          "type": "number",
+          "description": "年度保底",
+          "nullable": true
+        },
+        {
+          "name": "rate",
+          "type": "number",
+          "description": "提成率",
+          "nullable": true
+        }
+      ],
+      "key": [
+        "license_id"
+      ],
+      "references": [],
+      "path": "data/licenses.csv",
+      "row_count": 2,
+      "sha256": "c7472b773a3c3439049f0cbf145014e6d4ddca0a22b3baa4968bc7b33a8f8c95"
+    },
+    {
+      "name": "license_results",
+      "description": "合同技术包及价值权重。",
+      "columns": [
+        {
+          "name": "bridge_id",
+          "type": "string",
+          "description": "行",
+          "nullable": true
+        },
+        {
+          "name": "license_id",
+          "type": "string",
+          "description": "合同",
+          "nullable": true
+        },
+        {
+          "name": "result_id",
+          "type": "string",
+          "description": "成果",
+          "nullable": true
+        },
+        {
+          "name": "relative_weight",
+          "type": "number",
+          "description": "相对值",
+          "nullable": true
+        }
+      ],
+      "key": [
+        "bridge_id"
+      ],
+      "references": [
+        {
+          "column": "license_id",
+          "target_table": "licenses",
+          "target_column": "license_id"
+        },
+        {
+          "column": "result_id",
+          "target_table": "results",
+          "target_column": "result_id"
+        }
+      ],
+      "path": "data/license_results.csv",
+      "row_count": 3,
+      "sha256": "e63d31a0b9abc5e1f8a8ca05592c0c269d5f3a557ee1bcec1454237a004598e1"
+    },
+    {
+      "name": "milestones",
+      "description": "完整交付资格与金额。",
+      "columns": [
+        {
+          "name": "milestone_id",
+          "type": "string",
+          "description": "里程碑",
+          "nullable": true
+        },
+        {
+          "name": "license_id",
+          "type": "string",
+          "description": "合同",
+          "nullable": true
+        },
+        {
+          "name": "required_deliverables",
+          "type": "string",
+          "description": "必需材料",
+          "nullable": true
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "约定元",
+          "nullable": true
+        },
+        {
+          "name": "due",
+          "type": "date",
+          "description": "截止",
+          "nullable": true
+        }
+      ],
+      "key": [
+        "milestone_id"
+      ],
+      "references": [
+        {
+          "column": "license_id",
+          "target_table": "licenses",
+          "target_column": "license_id"
+        }
+      ],
+      "path": "data/milestones.csv",
+      "row_count": 2,
+      "sha256": "5f519aa67c3586c979faa80e18ccdb0406e3ced3b6d7a0cb6b4273795adb6ada"
+    },
+    {
+      "name": "deliveries",
+      "description": "被认可材料，不齐不按比例。",
+      "columns": [
+        {
+          "name": "delivery_id",
+          "type": "string",
+          "description": "回执",
+          "nullable": true
+        },
+        {
+          "name": "milestone_id",
+          "type": "string",
+          "description": "里程碑",
+          "nullable": true
+        },
+        {
+          "name": "deliverable",
+          "type": "string",
+          "description": "材料",
+          "nullable": true
+        },
+        {
+          "name": "accepted",
+          "type": "boolean",
+          "description": "认可",
+          "nullable": true
+        },
+        {
+          "name": "date",
+          "type": "date",
+          "description": "实际日",
+          "nullable": true
+        }
+      ],
+      "key": [
+        "delivery_id"
+      ],
+      "references": [
+        {
+          "column": "milestone_id",
+          "target_table": "milestones",
+          "target_column": "milestone_id"
+        }
+      ],
+      "path": "data/deliveries.csv",
+      "row_count": 3,
+      "sha256": "31147361ea844b0c51a09e492eb0efab167254ed596cb2a0b803968dee78d031"
+    },
+    {
+      "name": "sales_reports",
+      "description": "可修订报告原始稿。",
+      "columns": [
+        {
+          "name": "report_key",
+          "type": "string",
+          "description": "报告",
+          "nullable": true
+        },
+        {
+          "name": "license_id",
+          "type": "string",
+          "description": "合同",
+          "nullable": true
+        },
+        {
+          "name": "period_start",
+          "type": "date",
+          "description": "起",
+          "nullable": true
+        },
+        {
+          "name": "period_end",
+          "type": "date",
+          "description": "止",
+          "nullable": true
+        },
+        {
+          "name": "region",
+          "type": "string",
+          "description": "地域",
+          "nullable": true
+        },
+        {
+          "name": "field",
+          "type": "string",
+          "description": "用途",
+          "nullable": true
+        },
+        {
+          "name": "sales_amount",
+          "type": "number",
+          "description": "销售元",
+          "nullable": true
+        },
+        {
+          "name": "received_at",
+          "type": "datetime",
+          "description": "收到",
+          "nullable": true
+        }
+      ],
+      "key": [
+        "report_key"
+      ],
+      "references": [
+        {
+          "column": "license_id",
+          "target_table": "licenses",
+          "target_column": "license_id"
+        }
+      ],
+      "path": "data/sales_reports.csv",
+      "row_count": 2,
+      "sha256": "bf5acab23936acca451c658dbf8ed5a9c2a956e3fe943c393ebb41ca1cc111f1"
+    },
+    {
+      "name": "cash",
+      "description": "真实收款不是确认收入。",
+      "columns": [
+        {
+          "name": "cash_id",
+          "type": "string",
+          "description": "流水",
+          "nullable": true
+        },
+        {
+          "name": "license_id",
+          "type": "string",
+          "description": "合同",
+          "nullable": true
+        },
+        {
+          "name": "kind",
+          "type": "string",
+          "description": "receipt或refund",
+          "nullable": true
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "元",
+          "nullable": true
+        },
+        {
+          "name": "date",
+          "type": "date",
+          "description": "实际",
+          "nullable": true
+        }
+      ],
+      "key": [
+        "cash_id"
+      ],
+      "references": [
+        {
+          "column": "license_id",
+          "target_table": "licenses",
+          "target_column": "license_id"
+        }
+      ],
+      "path": "data/cash.csv",
+      "row_count": 2,
+      "sha256": "e56fd7fd432e26ff67d45e2d227edc809171b432ce16595d57ad13e37d5af972"
+    },
+    {
+      "name": "later_certificates",
+      "description": "后续生效日补正。",
+      "columns": [
+        {
+          "name": "certificate_id",
+          "type": "string",
+          "description": "证书",
+          "nullable": true
+        },
+        {
+          "name": "result_id",
+          "type": "string",
+          "description": "成果",
+          "nullable": true
+        },
+        {
+          "name": "start",
+          "type": "date",
+          "description": "起",
+          "nullable": true
+        },
+        {
+          "name": "end",
+          "type": "date",
+          "description": "止",
+          "nullable": true
+        },
+        {
+          "name": "region",
+          "type": "string",
+          "description": "地域",
+          "nullable": true
+        },
+        {
+          "name": "field",
+          "type": "string",
+          "description": "用途",
+          "nullable": true
+        }
+      ],
+      "key": [
+        "certificate_id"
+      ],
+      "references": [
+        {
+          "column": "result_id",
+          "target_table": "results",
+          "target_column": "result_id"
+        }
+      ],
+      "path": "data/later_certificates.csv",
+      "row_count": 1,
+      "sha256": "50731eb189f8dfdf58b341e5a0014fefc11fe8d6784e502488c5f30327a7db80"
+    },
+    {
+      "name": "later_sales_reports",
+      "description": "后续报告整稿修订。",
+      "columns": [
+        {
+          "name": "report_key",
+          "type": "string",
+          "description": "报告",
+          "nullable": true
+        },
+        {
+          "name": "license_id",
+          "type": "string",
+          "description": "合同",
+          "nullable": true
+        },
+        {
+          "name": "period_start",
+          "type": "date",
+          "description": "起",
+          "nullable": true
+        },
+        {
+          "name": "period_end",
+          "type": "date",
+          "description": "止",
+          "nullable": true
+        },
+        {
+          "name": "region",
+          "type": "string",
+          "description": "地域",
+          "nullable": true
+        },
+        {
+          "name": "field",
+          "type": "string",
+          "description": "用途",
+          "nullable": true
+        },
+        {
+          "name": "sales_amount",
+          "type": "number",
+          "description": "销售元",
+          "nullable": true
+        },
+        {
+          "name": "received_at",
+          "type": "datetime",
+          "description": "收到",
+          "nullable": true
+        }
+      ],
+      "key": [
+        "report_key"
+      ],
+      "references": [
+        {
+          "column": "license_id",
+          "target_table": "licenses",
+          "target_column": "license_id"
+        }
+      ],
+      "path": "data/later_sales_reports.csv",
+      "row_count": 1,
+      "sha256": "c2457e7e9d9039aebaa49a2ed17b547e2ab9f34594f9819ff29d89e3bdf74dcc"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+delivery_id,milestone_id,deliverable,accepted,date
+D1,M1,R1_DOC,true,2026-10-10
+D2,M1,R2_DOC,true,2026-10-15
+D3,M2,R1_DOC,false,2026-10-15

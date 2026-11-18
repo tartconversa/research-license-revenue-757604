@@ -1,0 +1,4 @@
+certificate_id,result_id,start,end,region,field
+C1,R1,2026-10-01,2027-01-01,north,research
+C2,R1,2026-10-01,2027-01-01,south,research
+C3,R2,2026-10-01,2027-01-01,north,research
